@@ -1,0 +1,80 @@
+<!--pages/add/add.wxml-->
+<view class="container">
+  <view class="form-container">
+    <!-- 标题输入 -->
+    <view class="form-section">
+      <view class="form-label">
+        <text class="label-text">愿望标题</text>
+        <text class="label-required">*</text>
+      </view>
+      <input 
+        class="form-input"
+        placeholder="例如：环游世界"
+        value="{{title}}"
+        bindinput="onInputTitle"
+        maxlength="50"
+      />
+      <view class="input-hint">给你的愿望起一个简短有力的标题</view>
+    </view>
+
+    <!-- 描述输入 -->
+    <view class="form-section">
+      <view class="form-label">
+        <text class="label-text">愿望描述</text>
+        <text class="label-required">*</text>
+      </view>
+      <textarea 
+        class="form-textarea"
+        placeholder="详细描述一下你的愿望，包括你想要达成的目标..."
+        value="{{description}}"
+        bindinput="onInputDescription"
+        maxlength="500"
+        auto-height
+      />
+      <view class="input-hint">详细描述你的愿望，让目标更清晰</view>
+    </view>
+
+    <!-- 优先级选择 -->
+    <view class="form-section">
+      <view class="form-label">
+        <text class="label-text">优先级</text>
+      </view>
+      <view class="priority-selector">
+        <view 
+          wx:for="{{priorityOptions}}"
+          wx:key="value"
+          class="priority-option {{priority == item.value ? 'active' : ''}}"
+          data-priority="{{item.value}}"
+          bindtap="onPriorityChange"
+          style="border-color: {{priority == item.value ? item.color : '#e5e7eb'}}; color: {{priority == item.value ? item.color : '#6b7280'}}"
+        >
+          <text class="priority-label">{{item.label}}</text>
+          <view 
+            class="priority-dot"
+            wx:if="{{priority == item.value}}"
+            style="background-color: {{item.color}}"
+          ></view>
+        </view>
+      </view>
+      <view class="input-hint">选择这个愿望对你的重要程度</view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="form-actions">
+      <button class="btn btn-reset" bindtap="onReset">重置</button>
+      <button class="btn btn-submit" bindtap="onSubmit">添加愿望</button>
+    </view>
+  </view>
+
+  <!-- 提示信息 -->
+  <view class="tips-section">
+    <view class="tips-title">💡 小贴士</view>
+    <view class="tips-content">
+      <text>• 写下你真正想做的事情，而不是别人期望的</text>
+      <text>• 愿望要具体明确，越详细越容易实现</text>
+      <text>• 定期回顾和更新你的清单，保持动力</text>
+      <text>• 完成愿望后记得标记，记录你的成长</text>
+    </view>
+  </view>
+</view>
+
